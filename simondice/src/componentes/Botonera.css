@@ -1,34 +1,39 @@
-/* Botonera.css */
-.parent {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 5px;
-    grid-row-gap: 5px;
-    }
 
-  button {
-    width: 100px;
-    height: 100px;
-    color: white;
-    border: none;
+.simon {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  width: 210px; /* Ancho total de los cuadrados + espacios */
+  height: 210px; /* Alto total de los cuadrados + espacios */
+  margin: 0 auto; /* Centra el contenedor horizontalmente en el padre */
+  align-items: center;
+  justify-content: center;
+}
 
-  }
-  
-  /* Estilos adicionales para los diferentes botones */
-  button:nth-child(1) {
-    background-color: red;
-  }
-  
-  button:nth-child(2) {
-    background-color: green;
-  }
-  
-  button:nth-child(3) {
-    background-color: yellow;
-  }
-  
-  button:nth-child(4) {
-    background-color: blue;
-  }
-  
+.boton {
+  height: 100px;
+  width: 100px; 
+}
+
+.rojo {
+  background-color: #EE6352;
+  border-radius: 100% 0 0 0;
+}
+
+.azul {
+  background-color: #08B2E3;
+  border-radius: 0 100% 0 0;
+}
+
+.verde {
+  background-color: #57A773;
+  border-radius: 0 0 0 100%;
+}
+
+.amarillo {
+  background-color: #FFDF64;
+  border-radius: 0 0 100% 0;
+
+}
