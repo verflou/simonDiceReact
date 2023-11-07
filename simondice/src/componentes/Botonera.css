@@ -1,0 +1,48 @@
+.simon {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  width: 210px; /* Ancho total de los cuadrados + espacios */
+  height: 210px; /* Alto total de los cuadrados + espacios */
+  margin: 0 auto; /* Centra el contenedor horizontalmente en el padre */
+  align-items: center;
+  justify-content: center;
+  padding: 100px;
+}
+.boton:active {
+  /* Estilo para el clic del botón */
+  transform: scale(0.95); /* Reducir el tamaño del botón al hacer clic */
+}
+
+.boton {
+  height: 150px;
+  width: 150px;
+}
+
+.rojo {
+  background-color: #EE6352;
+  border-radius: 100% 0 0 0;
+}
+
+.azul {
+  background-color: #08B2E3;
+  border-radius: 0 100% 0 0;
+}
+
+.verde {
+  background-color: #57A773;
+  border-radius: 0 0 0 100%;
+}
+
+.amarillo {
+  background-color: #FFDF64;
+  border-radius: 0 0 100% 0;
+}
+
+/* Añade un estilo para resaltar la secuencia */
+.boton.highlight {
+
+  filter: brightness(1.5) ;
+}
