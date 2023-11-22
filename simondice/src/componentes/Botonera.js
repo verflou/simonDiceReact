@@ -2,68 +2,74 @@ import React, { useState, useEffect } from 'react';
 import './Botonera.css';
 
 function Botonera() {
-  const coloresDisponibles = ["rojo", "azul", "verde", "amarillo"];
-  const [secuenciaGenerada, setSecuenciaGenerada] = useState([]);
-  const [secuenciaUsuario, setSecuenciaUsuario] = useState([]);
-  const [rondaActual, setRondaActual] = useState(1);
-  const [jugando, setJugando] = useState(false);
+  const colors = ["rojo", "azul", "verde", "amarillo"];
+  const [sequence, setSequence] = useState([]);
+  const [userSequence, setUserSequence] = useState([]);
+  const [round, setRound] = useState(1);
+  const [isStrictMode, setIsStrictMode] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  const generarNuevaSecuencia = () => {
-    const nuevoColor = coloresDisponibles[Math.floor(Math.random() * coloresDisponibles.length)];
-    setSecuenciaGenerada((secuenciaAnterior) => [...secuenciaAnterior, nuevoColor]);
-    console.log(nuevoColor);
+  // Genera una nueva secuencia en cada ronda
+  const generateSequence = () => {
+    const newColor = colors[Math.floor(Math.random() * colors.length)];
+    setSequence((prevSequence) => [...prevSequence, newColor]);
+    console.log(newColor);
   };
 
-  const iniciarJuego = () => {
-    setSecuenciaGenerada([]);
-    setSecuenciaUsuario([]);
-    setRondaActual(1);
-    generarNuevaSecuencia();
-    setJugando(true);
+  // Inicia un nuevo juego
+  const startGame = () => {
+    setSequence([]);
+    setUserSequence([]);
+    setRound(1);
+    generateSequence();
+    setIsPlaying(true);
   };
 
-  const comenzarNuevaRonda = () => {
-    setSecuenciaUsuario([]);
-    generarNuevaSecuencia();
-    setRondaActual((rondaAnterior) => rondaAnterior + 1);
+  // Comienza una nueva ronda
+  const startNewRound = () => {
+    setUserSequence([]);
+    generateSequence();
+    setRound((prevRound) => prevRound + 1);
   };
 
-  const manejarClicColor = (color) => {
-    if (jugando) {
-      setSecuenciaUsuario((secuenciaAnterior) => [...secuenciaAnterior, color]);
+  // Maneja el clic del usuario en un botón
+  const handleColorClick = (color) => {
+    if (isPlaying) {
+      setUserSequence((prevUserSequence) => [...prevUserSequence, color]);
     }
   };
 
+  // Comprueba si la secuencia del usuario coincide con la secuencia generada
   useEffect(() => {
-    if (secuenciaUsuario.length === secuenciaGenerada.length) {
-      if (JSON.stringify(secuenciaUsuario) === JSON.stringify(secuenciaGenerada)) {
-        if (rondaActual < 20) {
-          comenzarNuevaRonda();
+    if (userSequence.length === sequence.length) {
+      if (JSON.stringify(userSequence) === JSON.stringify(sequence)) {
+        if (round < 20) {
+          startNewRound();
         } else {
           alert('¡Ganaste el juego!');
-          setJugando(false);
+          setIsPlaying(false);
         }
       } else {
         alert('¡Perdiste! Intenta de nuevo.');
-        setJugando(false);
+        setIsPlaying(false);
       }
     }
-  }, [secuenciaUsuario, secuenciaGenerada, rondaActual]);
+  }, [userSequence, sequence, round]);
 
   return (
     <div className="simon">
-
-      <button onClick={iniciarJuego}>Comenzar Juego</button>
-      {coloresDisponibles.map((color) => (
+      <h2>Simon Classic</h2>
+      <button onClick={startGame}>Comenzar Juego</button>
+      {colors.map((color) => (
         <button
           key={color}
           className={`boton ${color}`}
-          onClick={() => manejarClicColor(color)}
+          onClick={() => handleColorClick(color)}
         ></button>
       ))}
       <div>
-        <p>Ronda: {rondaActual}</p>
-        {jugando && <p>¡Tu turno!</p>}
+        <p className='ronda'>Ronda: {round}</p>
+        {isPlaying && <p>¡Tu turno!</p>}
       </div>
     </div>
   );
